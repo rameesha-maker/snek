@@ -1,10 +1,11 @@
 import pygame
 import random
+from settings import *
 pygame.init()
 window= pygame.display.set_mode((800,600))
 pygame.display.set_caption("snep")
 
-player= pygame.surface.Surface((100,100))
+'''player= pygame.surface.Surface((100,100))
 player.fill((250,250,250))
 player_x = 0
 player_y = 0
@@ -19,7 +20,7 @@ falling_object_y = 0
 falling_object_vel_x = 0
 falling_object_vel_y = 0.3
 game_state = 1
-
+'''
 
 def collision_detection():
    return ((player_x <= falling_object_x + falling_object.width )and
@@ -27,7 +28,7 @@ def collision_detection():
    player_y <=(falling_object_y + falling_object.height +5 ) and 
    (player_y + player.height)>= falling_object_y)
 
-
+board =[[0 for col in range(COLS)]for row in range(ROWS)]
 
 while True:
    window.fill((23,53,64))
