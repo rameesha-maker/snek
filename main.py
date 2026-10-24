@@ -2,7 +2,7 @@ import pygame
 import random
 pygame.init()
 window= pygame.display.set_mode((800,600))
-pygame.display.set_caption("Its mine.andRameesha")
+pygame.display.set_caption("snep")
 
 player= pygame.surface.Surface((100,100))
 player.fill((250,250,250))
