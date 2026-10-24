@@ -22,8 +22,31 @@ def valid_position(shape,shape_x,shape_y):
 
 board =[[0 for col in range(COLS)]for row in range(ROWS)]
 
-while True:
+def draw_board():
+   for row in range(ROWS):
+      for col in range(COLS):
+         x = BOARD_X + col * BLOCK_SIZE
+         y = BOARD_Y + row * BLOCK_SIZE
+         rect = (x,y,BLOCK_SIZE,BLOCK_SIZE)
+         if board[row][col] == 0:
+            color = (30,45,60)
+         else:
+            color= (255,180,0)
+      pygame.draw.rect(window,color,rect)
+      pygame.draw.rect(window,(70,56,90),rect,1)
+
+def draw_shape():
+   for block_x,block_y in shape:
+      x= BOARD_X +(shape_x +block_x)* BLOCK_SIZE
+      y= BOARD_Y +(shape_y +block_y)* BLOCK_SIZE
+      pygame.draw.rect(window,(0,200,255),(x,y,BLOCK_SIZE,BLOCK_SIZE))
+
+while running:
    window.fill((23,53,64))
+
+   dt = clock.tick(60)
+
+
    for event in pygame.event.get():
       if event.type == pygame.KEYDOWN:
          if event.key == pygame.K_LEFT:
@@ -33,14 +56,11 @@ while True:
          if event.key == pygame.K_RIGHT:
             if valid_position(shape,shape_x +1,shape_y):
                shape+= 1
-         
-      else:
-         player_vel_x = 0
-         player_vel_y = 0
+   
 
 
       if event.type == pygame.QUIT:
-         quit(0)
+         running = False
 
 
    '''if collision_detection() :
@@ -71,14 +91,17 @@ while True:
    elif game_state== 2:
       window.blit( game_over, (50,200))'''
 
-   fall_timer += clock.get_time()
+   fall_timer += dt
    if fall_timer>= fall_delay:
       shape_y += 1
       fall_timer= 0
 
-   clock.tick(60)
+   draw_board()
+   draw_shape()
 
    pygame.display.flip()
+
+pygame.quit()
 
 
 
